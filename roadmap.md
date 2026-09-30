@@ -1,3 +1,3 @@
 - [x] Build the extension landing page around the supplied screenshots and Web Store link.
 - [x] Add clear features, steps, trust details, FAQs, and search/share metadata.
-- [ ] Verify desktop and mobile rendering and interactions.
+- [x] Verify desktop and mobile rendering and interactions.
