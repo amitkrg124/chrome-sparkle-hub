@@ -90,3 +90,12 @@
 .orange-rule { width: 40px; height: 3px; background: var(--orange); }
 .feature-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 6px; background: var(--tint); color: var(--primary); }
 .photo-frame { box-shadow: 0 18px 58px oklch(0.18 0.05 255 / .12); }
+.mobile-menu .menu-close-icon { display: none; }
+.mobile-menu[open] .menu-open-icon { display: none; }
+.mobile-menu[open] .menu-close-icon { display: block; }
+.screenshot-tab:has(input:checked) { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
+.screenshot-tab:has(input:focus-visible) { outline: 3px solid var(--orange); outline-offset: 3px; }
+.screenshot-panel { display: none; }
+.screenshot-gallery:has(input[value="0"]:checked) .screenshot-panel[data-shot="0"],
+.screenshot-gallery:has(input[value="1"]:checked) .screenshot-panel[data-shot="1"],
+.screenshot-gallery:has(input[value="2"]:checked) .screenshot-panel[data-shot="2"] { display: block; }

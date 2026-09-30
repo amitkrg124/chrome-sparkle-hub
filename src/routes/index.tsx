@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowRight, ArrowUpRight, Check, ChevronDown, Chrome, Clock3, CreditCard, FileText, LockKeyhole, MapPin, Menu, MousePointer2, ShieldCheck, Sparkles, Ticket, TrainFront, Users, Wallet, X, Zap } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronDown, Chrome, Clock3, CreditCard, FileText, LockKeyhole, MapPin, Menu, MousePointer2, ShieldCheck, Ticket, TrainFront, Users, Wallet, X, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import extensionIcon from "@/assets/tatkal-extension-icon.png.asset.json";
 import journeyImage from "@/assets/extension-journey.png.asset.json";
@@ -78,9 +77,6 @@ function InstallButton({ compact = false, light = false }: { compact?: boolean; 
 }
 
 function Index() {
-  const [activeShot, setActiveShot] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return <div className="min-h-screen overflow-x-hidden">
     <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-md">
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-3 px-5 sm:px-8 lg:px-12">
@@ -94,9 +90,8 @@ function Index() {
           <a className="transition-colors hover:text-orange" href="#demo">Screenshots</a>
           <a className="transition-colors hover:text-orange" href="#faq">FAQ</a>
         </nav>
-        <div className="flex items-center gap-2"><InstallButton compact /><Button variant="ghost" size="icon" className="lg:hidden" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button></div>
+        <div className="flex items-center gap-2"><InstallButton compact /><details className="mobile-menu relative lg:hidden"><summary className="flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-md text-primary hover:bg-accent [&::-webkit-details-marker]:hidden" aria-label="Toggle navigation"><Menu className="menu-open-icon h-4 w-4" /><X className="menu-close-icon h-4 w-4" /></summary><nav className="absolute right-0 top-[46px] z-50 grid min-w-44 border border-border bg-card p-2 text-sm font-semibold shadow-lg" aria-label="Mobile navigation">{[["Features", "#features"], ["How it works", "#how-it-works"], ["Screenshots", "#demo"], ["FAQ", "#faq"]].map(([label, href]) => <a key={href} href={href} className="rounded-sm px-3 py-3 hover:bg-accent">{label}</a>)}</nav></details></div>
       </div>
-      {menuOpen && <nav className="grid gap-0 border-t border-border bg-card px-5 py-2 text-sm font-semibold lg:hidden" aria-label="Mobile navigation">{[["Features", "#features"], ["How it works", "#how-it-works"], ["Screenshots", "#demo"], ["FAQ", "#faq"]].map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="py-3">{label}</a>)}</nav>}
     </header>
 
     <main id="top">
@@ -123,8 +118,10 @@ function Index() {
       </section>
 
       <section id="demo" className="bg-tint py-20 lg:py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12"><div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="section-kicker">The real extension</p><h2 className="section-heading mt-4 max-w-2xl text-3xl text-primary sm:text-4xl">See what you're adding to Chrome.</h2><p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">Actual screenshots of the Tatkal Autofill Assistant on the IRCTC website.</p></div><span className="flex shrink-0 items-center gap-2 text-xs font-semibold text-muted-foreground"><ShieldCheck size={16} className="text-teal" /> Forms only. No CAPTCHA bypass.</span></div>
-        <div className="photo-frame mt-10 overflow-hidden border border-border bg-card"><div className="flex items-center gap-2 border-b border-border bg-card px-4 py-3"><span className="h-2 w-2 rounded-full bg-orange/60" /><span className="h-2 w-2 rounded-full bg-muted-foreground/30" /><span className="h-2 w-2 rounded-full bg-muted-foreground/30" /><span className="ml-3 text-[11px] font-semibold text-muted-foreground">IRCTC booking with Tatkal Autofill Assistant</span></div><img src={shots[activeShot]?.image ?? journeyImage.url} alt={shots[activeShot]?.alt ?? "IRCTC Tatkal Autofill Assistant journey details"} loading="lazy" className="block aspect-[1535/717] w-full object-cover object-left-top" /></div>
-        <div className="mt-5 flex flex-wrap gap-2" aria-label="Screenshot selection">{shots.map((shot, i) => <Button key={shot.label} variant={activeShot === i ? "tabActive" : "tab"} size="sm" aria-pressed={activeShot === i} onClick={() => setActiveShot(i)}><span className="font-bold">0{i + 1}</span> {shot.label}</Button>)}</div>
+        <div className="screenshot-gallery">
+          <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Screenshot selection">{shots.map((shot, i) => <label key={shot.label} className="screenshot-tab relative inline-flex h-8 cursor-pointer items-center gap-2 rounded-md border border-border bg-card px-3 text-xs font-medium text-muted-foreground"><input className="absolute inset-0 h-full w-full cursor-pointer opacity-0" type="radio" name="screenshot" value={i} defaultChecked={i === 0} aria-label={shot.label} /><span className="font-bold">0{i + 1}</span> {shot.label}</label>)}</div>
+          <div className="photo-frame mt-5 overflow-hidden border border-border bg-card"><div className="flex items-center gap-2 border-b border-border bg-card px-4 py-3"><span className="h-2 w-2 rounded-full bg-orange/60" /><span className="h-2 w-2 rounded-full bg-muted-foreground/30" /><span className="h-2 w-2 rounded-full bg-muted-foreground/30" /><span className="ml-3 text-[11px] font-semibold text-muted-foreground">IRCTC booking with Tatkal Autofill Assistant</span></div>{shots.map((shot, i) => <img key={shot.label} data-shot={i} src={shot.image} alt={shot.alt} loading="lazy" className="screenshot-panel aspect-[1535/717] w-full object-cover object-left-top" />)}</div>
+        </div>
       </div></section>
 
       <section id="features" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28"><p className="section-kicker">Everything in one extension</p><div className="mt-4 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><h2 className="section-heading max-w-2xl text-3xl text-primary sm:text-4xl">All the little details,<br />already taken care of.</h2><p className="max-w-xs text-sm leading-7 text-muted-foreground">From passenger names to your preferred payment option. No subscription, no extra steps.</p></div><div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{features.map(({ icon: Icon, title, text, tag }) => <article key={title} className="group flex min-h-[222px] flex-col border border-border bg-card p-6 transition-colors hover:border-primary/45"><span className="feature-icon"><Icon size={22} strokeWidth={1.8} aria-hidden="true" /></span><h3 className="mt-5 font-display text-[17px] font-bold text-primary">{title}</h3><p className="mt-2 flex-1 text-sm leading-6 text-muted-foreground">{text}</p><span className="mt-5 text-xs font-bold text-orange">{tag} <span aria-hidden="true">↗</span></span></article>)}</div></section>
