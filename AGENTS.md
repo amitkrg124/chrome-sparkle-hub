@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+Use the index route as the single product landing page, with user-supplied extension screenshots served through asset pointers; this keeps product proof authentic and avoids duplicating pages.
