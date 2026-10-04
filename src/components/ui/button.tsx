@@ -12,7 +12,8 @@ const buttonVariants = cva(
         default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         install: "bg-orange text-orange-foreground font-bold hover:bg-orange/90 shadow-sm",
         hero: "bg-orange text-orange-foreground font-bold hover:bg-orange/90 shadow-sm",
-        heroOutline: "border border-line-light bg-navy/30 text-navy-foreground font-bold hover:bg-navy-soft",
+        heroOutline:
+          "border border-line-light bg-navy/30 text-navy-foreground font-bold hover:bg-navy-soft",
         tab: "border border-border bg-card text-muted-foreground hover:text-primary hover:border-primary/40",
         tabActive: "border border-primary bg-primary text-primary-foreground",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
