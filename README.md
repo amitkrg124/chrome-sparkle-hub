@@ -1,7 +1,6 @@
 # Chroma Companion
 
-https://chromewebstore.google.com/detail/hgiefnnhpkoikmpbdbehpacopdefjnag?utm_source=item-share-cb   this is the extension link 
-
+https://chromewebstore.google.com/detail/hgiefnnhpkoikmpbdbehpacopdefjnag?utm_source=item-share-cb this is the extension link
 
 make sure ui should be attractive and eye catchi yet clear to under stand
 
